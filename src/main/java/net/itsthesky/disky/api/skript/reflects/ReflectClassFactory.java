@@ -46,7 +46,7 @@ public final class ReflectClassFactory {
                 builder = builder.annotateType(AnnotationDescription.Builder.ofType(Name.class).define("value", documentation.getName()).build())
                         .annotateType(AnnotationDescription.Builder.ofType(Description.class).defineArray("value", documentation.getDescription()).build())
                         .annotateType(AnnotationDescription.Builder.ofType(Examples.class).defineArray("value", documentation.getExamples()).build())
-                        .annotateType(AnnotationDescription.Builder.ofType(Since.class).defineArray("value", documentation.getSince()).build());
+                        .annotateType(AnnotationDescription.Builder.ofType(Since.class).define("value", documentation.getSince()[0]).build());
             }
 
             final Class<?> elementClass = builder
@@ -91,7 +91,7 @@ public final class ReflectClassFactory {
                         .annotateType(AnnotationDescription.Builder.ofType(Name.class).define("value", documentation.getName()).build())
                         .annotateType(AnnotationDescription.Builder.ofType(Description.class).defineArray("value", documentation.getDescription()).build())
                         .annotateType(AnnotationDescription.Builder.ofType(Examples.class).defineArray("value", documentation.getExamples()).build())
-                        .annotateType(AnnotationDescription.Builder.ofType(Since.class).defineArray("value", documentation.getSince()).build());
+                        .annotateType(AnnotationDescription.Builder.ofType(Since.class).define("value", documentation.getSince()[0]).build());
             }
 
             final Class<?> elementClass = builder

@@ -47,8 +47,8 @@ dependencies {
     implementation 'org.bstats:bstats-bukkit:3.0.2'
 
     // Class manipulation
-    implementation 'net.bytebuddy:byte-buddy:1.14.10'
-    implementation 'net.bytebuddy:byte-buddy-agent:1.14.10'
+    implementation 'net.bytebuddy:byte-buddy:1.15.11'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.15.11'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.28'

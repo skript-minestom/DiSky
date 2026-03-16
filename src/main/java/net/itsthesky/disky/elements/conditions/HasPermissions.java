@@ -1,8 +1,5 @@
 package net.itsthesky.disky.elements.conditions;
 
-import ch.njol.skript.Skript;
-import net.itsthesky.disky.api.DiSkyRegistry;
-import ch.njol.skript.conditions.CondPermission;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -16,13 +13,10 @@ import ch.njol.util.Kleenean;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
-import net.itsthesky.disky.DiSky;
-import net.itsthesky.disky.api.DiSkyRegistry;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.skriptlang.skript.registration.SyntaxRegistry;
 
 @Name("Member Has Permissions")
 @Description("Check if a member has permissions in an optional channel.")
@@ -33,22 +27,10 @@ import org.skriptlang.skript.registration.SyntaxRegistry;
 public class HasPermissions extends Condition {
 
     static {
-        if (DiSkyRegistry.unregisterElement(SyntaxRegistry.CONDITION, CondPermission.class)) {
-            Skript.registerCondition(
-                    HasPermissions.class,
-                    "%commandsenders/members% (has|have) [the] [discord] permission[s] %strings/permissions% [in [the] [channel] %-guildchannel%]",
-                    "%commandsenders/members% (doesn't|does not|do not|don't) have [the] [discord] permission[s] %strings/permissions% [in [the] [channel] %-guildchannel%]"
-            );
-            DiSky.debug("Successfully unregistered the 'has permission' condition to register the new one.");
-        } else {
-            Skript.error("Cannot register the 'has permission' condition since the original one cannot be unregistered! We'll register the default one instead.");
-            PropertyCondition.register(
-                    HasPermissions.class,
-                    PropertyCondition.PropertyType.HAVE,
-                    "discord permission[s] %permissions% [in [the] [channel] %-guildchannel%]",
-                    "member"
-            );
-        }
+        PropertyCondition.register(HasPermissions.class, PropertyCondition.PropertyType.HAVE,
+            "discord permission[s] %permissions% [in [the] [channel] %-guildchannel%]",
+            "member"
+        );
     }
 
     private Expression<Object> exprEntities;

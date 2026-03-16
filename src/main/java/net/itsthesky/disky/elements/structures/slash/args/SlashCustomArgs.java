@@ -39,8 +39,7 @@ public class SlashCustomArgs {
         AVAILABLE_ARGUMENTS.add(new MemberCustomArg());
         AVAILABLE_ARGUMENTS.add(new ColorCustomArg());
 
-        AVAILABLE_ARGUMENTS.add(new PlayerCustomArg(true));
-        AVAILABLE_ARGUMENTS.add(new PlayerCustomArg(false));
+        AVAILABLE_ARGUMENTS.add(new PlayerCustomArg());
 
         final var normalArgs = AVAILABLE_ARGUMENTS.size();
         Thread thread = new Thread(() -> {

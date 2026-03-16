@@ -258,7 +258,7 @@ public class EventRegistryFactory {
         }
     }
 
-    protected static class BasicFunctionInterceptor<I, S extends Event, R> {
+    public static class BasicFunctionInterceptor<I, S extends Event, R> {
 
         private final BiFunction<I, S, R> function;
         public BasicFunctionInterceptor(BiFunction<I, S, R> function) {
@@ -277,7 +277,7 @@ public class EventRegistryFactory {
         }
     }
 
-    protected static class PredicateInterceptor {
+    public static class PredicateInterceptor {
 
         private final Predicate predicate;
         public PredicateInterceptor(Predicate predicate) {
@@ -290,7 +290,7 @@ public class EventRegistryFactory {
         }
     }
 
-    protected static class ComplexInterceptor {
+    public static class ComplexInterceptor {
 
         private final BiFunction<Object[], Object, Object> function;
         public ComplexInterceptor(BiFunction<Object[], Object, Object> function) {

@@ -35,31 +35,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class PlayerCustomArg extends CustomArgument<OfflinePlayer> {
+public class PlayerCustomArg extends CustomArgument<String> {
 
-    private final boolean offline;
-
-    public PlayerCustomArg(boolean offline) {
-        super(OfflinePlayer.class, OptionType.STRING, true, false);
-        this.offline = offline;
+    public PlayerCustomArg() {
+        super(String.class, OptionType.STRING, true, false);
     }
 
     @Override
     public boolean supportsClass(@NotNull ClassInfo<?> classInfo) {
-        if (offline)
-            return OfflinePlayer.class.isAssignableFrom(classInfo.getC());
 
         return Player.class.isAssignableFrom(classInfo.getC());
     }
 
     @Override
     public List<Command.Choice> handleAutoCompletion(@NotNull CommandAutoCompleteInteractionEvent event, @NotNull String input) {
-        final List<OfflinePlayer> players;
-        if (offline) {
-            players = List.of(Bukkit.getOfflinePlayers());
-        } else {
-            players = Arrays.asList(Bukkit.getOnlinePlayers().toArray(new OfflinePlayer[0]));
-        }
+        final List<Player> players = Arrays.asList(Bukkit.getOnlinePlayers().toArray(new Player[0]));
 
         return players.stream()
                 .filter(player -> player.getName() != null)
@@ -69,18 +59,18 @@ public class PlayerCustomArg extends CustomArgument<OfflinePlayer> {
     }
 
     @Override
-    public @Nullable OfflinePlayer convert(@NotNull SlashCommandInteractionEvent event, @NotNull OptionMapping mapping) {
+    public @Nullable String convert(@NotNull SlashCommandInteractionEvent event, @NotNull OptionMapping mapping) {
         final var playerName = mapping.getAsString();
         final var uuid = UUID.fromString(playerName);
 
-        return offline ? Bukkit.getOfflinePlayer(uuid) : Bukkit.getPlayer(uuid);
+        return Bukkit.getPlayer(uuid) == null ? null : playerName;
     }
 
     @Override
-    public @Nullable OfflinePlayer convert(@NotNull CommandAutoCompleteInteractionEvent event, @NotNull OptionMapping mapping) {
+    public @Nullable String convert(@NotNull CommandAutoCompleteInteractionEvent event, @NotNull OptionMapping mapping) {
         final var playerName = mapping.getAsString();
         final var uuid = UUID.fromString(playerName);
 
-        return offline ? Bukkit.getOfflinePlayer(uuid) : Bukkit.getPlayer(uuid);
+        return Bukkit.getPlayer(uuid) == null ? null : playerName;
     }
 }
