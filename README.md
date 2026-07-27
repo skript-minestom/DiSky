@@ -1,5 +1,8 @@
 # DiSky
 
+> [!IMPORTANT]
+> skript-minestom has no intention of maintaining a fork of DiSky at this moment in time.
+
 *** 
 
 ## What is DiSky?
